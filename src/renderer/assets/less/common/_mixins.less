@@ -1,0 +1,156 @@
+@import "_variables.less";
+
+//Color Option Mixins
+@colors: transparent, @colorWhite, @colorOffWhite, @colorBlack, @colorLightGrey, @colorGrey, @colorDarkGrey, @colorBlueGrey, @colorOrange, @colorTeal, @colorDarkTeal, @colorBlue,
+         @colorLightBlue, @colorYellow, @colorDarkYellow, @colorPurple, @colorLightPurple, @colorGreen, @colorDarkGreen, @colorRed,
+         @colorDarkRed;
+
+@colors-so: transparent, @colorWhite-so, @colorOffWhite-so, @colorBlack-so, @colorLightGrey-so, @colorGrey-so, @colorDarkGrey-so, @colorBlueGrey-so, @colorOrange-so,
+            @colorTeal-so, @colorDarkTeal-so, @colorBlue-so, @colorLightBlue-so, @colorYellow-so, @colorDarkYellow-so, @colorPurple-so,
+            @colorLightPurple-so, @colorGreen-so, @colorDarkGreen-so, @colorRed-so, @colorDarkRed-so;
+
+@colorModifiers: noColor, white, offWhite, black, lightGrey, grey, darkGrey, blueGrey, orange, teal, darkTeal, blue, lightBlue, yellow, darkYellow,
+                 purple, lightPurple, green, darkGreen, red, darkRed;
+
+
+.colorOptions (@i: length(@colors)) when (@i > 0) {
+    @color: extract(@colors, @i);
+    @modifier: extract(@colorModifiers, @i);
+
+    &--@{modifier} {
+        background-color: @color !important;
+    }
+    &--@{modifier} when (@i > 3) {
+        color: @colorWhite !important;
+        fill: @colorWhite !important;
+    }
+
+    .colorOptions((@i - 1));
+}
+
+.colorOptions-so (@i: length(@colors-so)) when (@i > 0) {
+    @color: extract(@colors-so, @i);
+    @modifier: extract(@colorModifiers, @i);
+
+    &--@{modifier} {
+        background-color: @color !important;
+    }
+    &--@{modifier} when (@i > 3) {
+        color: @colorWhite !important;
+        fill: @colorWhite !important;
+    }
+
+    .colorOptions-so((@i - 1));
+}
+
+.gradientOptions (@i: length(@colors-so)) when (@i > 0) {
+    @color: extract(@colors-so, @i);
+    @modifier: extract(@colorModifiers, @i);
+
+    &--@{modifier} {
+        background: linear-gradient(to right, @color 0%, @color 5%,rgba(0, 0, 0, 0.0001) 90%) !important;
+    }
+    &--@{modifier} when (@color=noColor) {
+        background: rgba(0, 0, 0, 0.0001) !important;
+    }
+    &--@{modifier} when (@i > 3) {
+        color: @colorWhite !important;
+        fill: @colorWhite !important;
+    }
+
+    .gradientOptions((@i - 1));
+}
+
+.borderColorOptions (@i: length(@colors)) when (@i > 0) {
+    @color: extract(@colors, @i);
+    @modifier: extract(@colorModifiers, @i);
+
+    &--@{modifier} {
+        border-color: @color !important;
+    }
+
+    .borderColorOptions((@i - 1));
+}
+
+.textColorOptions (@i: length(@colors)) when (@i > 0) {
+    @color: extract(@colors, @i);
+    @modifier: extract(@colorModifiers, @i);
+
+    &--@{modifier} {
+        color: @color !important;
+        fill: @color !important;
+    }
+
+    .textColorOptions((@i - 1));
+}
+
+
+//Triangle Position Mixin
+
+@corners: upperLeft, upperRight, lowerLeft, lowerRight;
+
+.trianglePosition(@i: length(@corners)) when (@i > 0) {
+    @corner: extract(@corners, @i);
+
+    &--@{corner} when (@corner=upperLeft) {
+        &:after {
+            content: '';
+            top: 0;
+            left: 0;
+            border-top: 50px solid;
+	        border-right: 50px solid transparent;
+            border-top-color: inherit;
+
+            @media @bpMedium {
+                border-width: 150px;
+            }
+        }
+    }
+
+    &--@{corner} when (@corner=upperRight) {
+        &:after {
+            content: '';
+            top: 0;
+            right: 0;
+            border-top: 50px solid;
+	        border-left: 50px solid transparent;
+            border-top-color: inherit;
+
+            @media @bpMedium {
+                border-width: 150px;
+            }
+        }
+    }
+
+    &--@{corner} when (@corner=lowerLeft) {
+        &:after {
+            content: '';
+            bottom: 0;
+            left: 0;
+            border-bottom: 50px solid;
+	        border-right: 50px solid transparent;
+            border-bottom-color: inherit;
+
+            @media @bpMedium {
+                border-width: 150px;
+            }
+        }
+    }
+
+    &--@{corner} when (@corner=lowerRight) {
+        &:after {
+            content: '';
+            bottom: 0;
+            right: 0;
+            border-bottom: 50px solid;
+	        border-left: 50px solid transparent;
+            border-bottom-color: inherit;
+
+            @media @bpMedium {
+                border-width: 150px;
+            }
+        }
+    }
+
+    .trianglePosition((@i - 1));
+}

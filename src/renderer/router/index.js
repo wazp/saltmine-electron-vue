@@ -8,7 +8,20 @@ export default new Router({
     {
       path: '/',
       name: 'landing-page',
-      component: require('@/Pages/LandingPage').default
+      component: require('@/Pages/LandingPage').default,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login-page',
+      component: require('@/Pages/LoginPage').default
+    },
+    {
+      path: '/register',
+      name: 'register-page',
+      component: require('@/Pages/RegisterPage').default
     },
     {
       path: '*',

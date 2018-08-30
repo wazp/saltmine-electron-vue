@@ -10,13 +10,14 @@
       </script>
     <% } %>
   </head>
-  <body>
+  <body class="loading">
     <div id="app"></div>
     <!-- Set `__static` path to static files in production -->
     <script>
       if (process.env.NODE_ENV !== 'development') window.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
     </script>
-
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-auth.js"></script>
     <!-- webpack builds are automatically injected -->
   </body>
 </html>

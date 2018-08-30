@@ -1,8 +1,8 @@
 <template>
-  <div id="page">
-    <div class="top">
-      <input type="text" placeholder="What are you working on?" />
-    </div>
+  <div>
+    <h1>This is the landing page!</h1>
+    <router-link to="/login">Login!</router-link>
+    <router-link to="/register">Register!</router-link>
   </div>
 </template>
 
@@ -17,4 +17,5 @@
     height:2rem;
     background:#333;
   }
+  a{display:block;}
 </style>
