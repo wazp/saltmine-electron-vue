@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     signUp () {
-      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
+      this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         (user) => {
           this.$router.replace('/')
         },

@@ -2,14 +2,33 @@
     <div class="title">
         <span>saltmine</span>
         <div id="windowControl">
-            <a href="#" class="config">Config</a>
-            <a href="#" class="close">Close</a>
+            <a @click="config" class="config">Config</a>
+            <a @click="close" class="close">Close</a>
         </div>
     </div>
 </template>
 
 <script>
-
+  export default {
+    name: 'titlebar',
+    methods: {
+      close () {
+        this.$electron.remote.getCurrentWindow().close()
+      },
+      config () {
+        let b = document.getElementsByTagName('body')[0]
+        if (!b.classList.contains('preferences')) {
+          b.classList.add('preferences')
+          b.classList.add('is-open')
+        } else {
+          document.getElementById('preferences').addEventListener('transitionend', () => {
+            b.classList.remove('preferences')
+          })
+          b.classList.remove('is-open')
+        }
+      }
+    }
+  }
 </script>
 
 <style lang="less" scoped>
@@ -23,6 +42,7 @@
     }
     span{color:#fff;flex-grow:1;}
     #windowControl{
+        -webkit-app-region:no-drag;
         width:80px;
         height:40px;
         margin:-10px 0 0 0;
@@ -39,15 +59,24 @@
                 &::before, &::after{
                     position: absolute;
                     left: 20px;
-                    top: 5px;
+                    top: 7px;
                     content: ' ';
-                    height: 30px;
+                    height: 25px;
                     width: 2px;
                     background-color: #fff;
                 }
                 &::before{transform:rotate(45deg);}
                 &::after{transform:rotate(-45deg);}
             }
+
+            &.config{
+                background-image:url('../assets/global-settings.svg');
+                background-size: 60% 60%;
+                background-repeat: no-repeat;
+                background-position: 50% 50%;
+            }
+
+            &:hover{background-color:rgba(255,255,255,.2)}
         }
         
     }

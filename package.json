@@ -57,15 +57,16 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "electron-window-state": "^4.1.1",
     "extract-text-webpack-plugin": "^3.0.2",
-    "firebase": "^5.4.1",
     "less": "^3.7.1",
     "less-loader": "^4.1.0",
     "standard": "^12.0.0",
     "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

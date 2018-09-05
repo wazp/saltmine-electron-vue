@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import axios from 'axios'
+import { ipcRenderer } from 'electron'
+import fbConfig from './firebase'
 
 import App from './App'
 import router from './router'
@@ -11,21 +13,18 @@ Vue.config.productionTip = false
 
 let app = null
 
-const config = {
-  apiKey: 'AIzaSyA_93fQHWXhGVGnKgESWqLxbXJhcTp21SM',
-  authDomain: 'saltmine-95fb7.firebaseapp.com',
-  databaseURL: 'https://saltmine-95fb7.firebaseio.com',
-  projectId: 'saltmine-95fb7',
-  storageBucket: 'saltmine-95fb7.appspot.com',
-  messagingSenderId: '938370311800'
+Vue.prototype.$firebase = firebase.initializeApp(fbConfig)
+const firestore = firebase.firestore()
+const settings = {
+  timestampsInSnapshots: true
 }
+firestore.settings(settings)
 
-firebase.initializeApp(config)
 // setup watcher for state change and don't initialize before we know we're logged in/logged out...
 firebase.auth().onAuthStateChanged(user => {
   if (!app) {
     /* eslint-disable no-new */
-    new Vue({
+    app = new Vue({
       components: { App },
       router,
       store,
@@ -49,4 +48,13 @@ router.beforeEach((to, from, next) => {
   } else {
     next() // follow the route
   }
+})
+
+// if we get a call for new-timer from the main process
+ipcRenderer.on('new-timer', (e, a) => {
+  router.replace('/new-timer')
+})
+
+ipcRenderer.on('debug', (e, a) => {
+  console.log(a)
 })

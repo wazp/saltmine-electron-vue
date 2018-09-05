@@ -14,6 +14,14 @@ export default new Router({
       }
     },
     {
+      path: '/new-timer',
+      name: 'new-timer',
+      component: require('@/Pages/NewTimer').default,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
       path: '/login',
       name: 'login-page',
       component: require('@/Pages/LoginPage').default
