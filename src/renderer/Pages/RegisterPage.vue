@@ -48,7 +48,7 @@ export default {
           this.$router.replace('/')
         },
         (err) => {
-          alert(err)
+          this.$store.commit('App/setError', err.message)
         }
       )
     }

@@ -5,18 +5,21 @@
       <router-view></router-view>
     </div>
     <preferences></preferences>
+    <alert></alert>
   </div>
 </template>
 
 <script>
   import titlebar from './components/header.vue'
   import preferences from './components/preferences.vue'
+  import alert from './components/alert.vue'
 
   export default {
     name: 'saltmine',
     components: {
       titlebar,
-      preferences
+      preferences,
+      alert
     },
     mounted () {
       document.getElementsByTagName('body')[0].classList.remove('loading')
