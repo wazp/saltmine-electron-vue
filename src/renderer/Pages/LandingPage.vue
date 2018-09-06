@@ -9,8 +9,8 @@
 <script>
   export default {
     name: 'landing-page',
-    data: {
-
+    data () {
+      return {}
     }
   }
 </script>

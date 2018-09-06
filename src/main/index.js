@@ -89,6 +89,7 @@ function createWindow () {
     ...menu
   ]) // hook up the menu to the system tray icon
   tray.setToolTip('Saltmine')
+  tray.setTitle('test!')
   tray.setContextMenu(contextMenu)
   tray.on('click', () => {
     mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
