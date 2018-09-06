@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import { ipcRenderer } from 'electron'
+
   export default {
     name: 'titlebar',
     methods: {
@@ -18,9 +20,11 @@
       config () {
         let b = document.getElementsByTagName('body')[0]
         if (!b.classList.contains('preferences')) {
+          ipcRenderer.send('switchIcon', 'on')
           b.classList.add('preferences')
           b.classList.add('is-open')
         } else {
+          ipcRenderer.send('switchIcon', 'off')
           document.getElementById('preferences').addEventListener('transitionend', () => {
             b.classList.remove('preferences')
           })

@@ -35,9 +35,7 @@ export default {
   },
   mounted () {
     // focus email or password depending on if user have saved email or not
-    console.log(this.email)
     let email = (this.$store.state.User.email) ? this.$store.state.User.email.length : 0
-    console.log(email)
     let input = document.querySelector((!email) ? 'input[type=text]' : 'input[type=password]')
     input.focus()
   },

@@ -48,10 +48,10 @@ export default {
           // save user info to persistent store
           this.$store.commit('User/setUser', user.user)
           // create first document specific to logged in user under "users"
-          // this.$firebase.firestore().collection('users').doc(user.user.uid).set({
-          //   first: 'Test',
-          //   second: 'Test2'
-          // })
+          this.$firebase.firestore().collection('users').doc(user.user.uid).set({
+            first: 'Test',
+            second: 'Test2'
+          })
           this.$router.replace('/')
         },
         (err) => {

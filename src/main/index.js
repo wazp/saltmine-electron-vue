@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, Tray, Menu, BrowserWindow, screen } from 'electron'
+import { app, Tray, Menu, BrowserWindow, screen, ipcMain } from 'electron'
 import windowState from 'electron-window-state'
 
 /**
@@ -15,6 +15,10 @@ let mainWindow, tray
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080/`
   : `file://${__dirname}/index.html`
+const platform = require('os').platform()
+
+const trayIconOff = (platform === 'darwin') ? `${__static}/png-off/16x16.png` : `${__static}/png-off/32x32.png`
+const trayIconOn = (platform === 'darwin') ? `${__static}/png-on/16x16.png` : `${__static}/png-on/32x32.png`
 
 function createWindow () {
   /**
@@ -77,7 +81,7 @@ function createWindow () {
     }
   ]
 
-  tray = new Tray(`${__static}/icon.png`)
+  tray = new Tray(trayIconOff)
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Show',
@@ -116,6 +120,15 @@ app.on('ready', createWindow)
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
+  }
+})
+
+// setup a listener for changing the icon
+ipcMain.on('switchIcon', (e, a) => {
+  if (a === 'on') {
+    tray.setImage(trayIconOn)
+  } else {
+    tray.setImage(trayIconOff)
   }
 })
 
