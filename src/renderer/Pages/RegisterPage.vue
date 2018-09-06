@@ -1,10 +1,10 @@
 <template>
     <div class="page">
         <img src="@/assets/images/saltmine_logo.svg" />
-        <form>
-        <betterinput type="text" label="email" v-model="email" />
-        <betterinput type="password" label="password" v-model="password" />
-        <button @click="signUp">Register!</button>
+        <form @submit="signUp">
+          <betterinput type="text" label="email" v-model="email" />
+          <betterinput type="password" label="password" v-model="password" />
+          <button @click="signUp">Register!</button>
         </form>
         <router-link to="/">Home</router-link>
     </div>
@@ -40,7 +40,8 @@ export default {
     input.focus()
   },
   methods: {
-    signUp () {
+    signUp (e) {
+      e.preventDefault()
       this.$firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         (user) => {
           this.$router.replace('/')

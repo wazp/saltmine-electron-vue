@@ -23,7 +23,7 @@
   },
   "build": {
     "productName": "saltmine",
-    "appId": "org.simulatedgreg.electron-vue",
+    "appId": "org.wazpys.saltmine",
     "directories": {
       "output": "build"
     },

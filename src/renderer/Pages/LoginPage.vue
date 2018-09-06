@@ -2,10 +2,10 @@
     <div class="page">
         <img src="@/assets/images/saltmine_logo.svg" />
         <p>Welcome to Saltmine! Please login below, or hit "Register" to create a new user.</p>
-        <form>
-        <betterinput type="text" label="email" v-model="email" />
-        <betterinput type="password" label="password" v-model="password" />
-        <button @click="login">Login!</button>
+        <form @submit="login">
+          <betterinput type="text" label="email" v-model="email" />
+          <betterinput type="password" label="password" v-model="password" />
+          <button @click="login">Login!</button>
         </form>
         <router-link to="/register">Register</router-link>
     </div>
@@ -41,7 +41,8 @@ export default {
     input.focus()
   },
   methods: {
-    login () {
+    login (e) {
+      e.preventDefault()
       this.$firebase.auth().signInWithEmailAndPassword(this.$store.state.User.email, this.password).then(
         (user) => {
           console.log(user)

@@ -132,6 +132,20 @@ ipcMain.on('switchIcon', (e, a) => {
   }
 })
 
+// make the app single instance. if second instance is started, just show the already available mainWindow and quit second instance.
+var iShouldQuit = app.makeSingleInstance((commandLine, workingDirectory) => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore()
+    mainWindow.show()
+    mainWindow.focus()
+  }
+  return true
+})
+
+if (iShouldQuit) {
+  app.quit()
+}
+
 /**
  * Auto Updater
  *
