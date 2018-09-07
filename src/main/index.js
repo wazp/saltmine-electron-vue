@@ -31,11 +31,13 @@ function createWindow () {
 
   mainWindow = new BrowserWindow({
     frame: false,
-    height: mainWindowState.height,
     useContentSize: false,
-    width: mainWindowState.width,
     show: false,
     fullscreenable: false,
+    skipTaskbar: true,
+    alwaysOnTop: true,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
     x: mainWindowState.x,
     y: mainWindowState.y
   })
